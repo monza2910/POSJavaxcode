@@ -30,7 +30,9 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $subcategories = SubCategory::all();
+        return view('dashboard.admin.menu.create',compact('categories','subcategories'));
     }
 
     /**
@@ -41,7 +43,35 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name' => 'required|min:5|max:100',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_id' => 'required',
+            'subcategory' => 'required',
+            'price' => 'required|integer',
+            'stok' => 'required|integer',
+            'status' => 'required',       
+        ]);
+
+        
+
+        $image = time().'.'.$request->image->extension();  
+        $imageName = md5($image).'.'.$request->image->extension();
+     
+        $request->image->move(public_path('images/images_menu'), $imageName);
+        $menu = Menu::create([
+            'name'          => $request->name,
+            'image'         => $imageName,
+            'category_id'   => $request->category_id,
+            'stok'          => $request->stok,
+            'price'         => $request->price,
+            'status'        => $request->status,
+        ]);
+        $menu->subcategory()->attach($request->subcategory);
+
+        return redirect()->route('menu.index')->with('success','You have successfully added menu.');
+
     }
 
     /**
@@ -63,7 +93,12 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $menu   = Menu::findorFail($id);
+        $cat_id     = $menu['category_id'];
+        $subcategories = SubCategory::orderBy('id','desc')->get();
+        $categories = Category::where('id','!=',$cat_id)->get();
+        return view('dashboard.admin.menu.edit',compact('categories','subcategories','menu'));
+
     }
 
     /**
@@ -75,7 +110,64 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+
+        $menu = Menu::findorfail($id);
+
+        if ($request->has('image')) {
+
+            $request->validate([
+                'name' => 'required|min:5|max:100',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'category_id' => 'required',
+                'subcategory' => 'required',
+                'price' => 'required|integer',
+                'stok' => 'required|integer',
+                'status' => 'required',       
+            ]);
+
+            $image = time().'.'.$request->image->extension();  
+            $imageName = md5($image).'.'.$request->image->extension();
+        
+            $request->image->move(public_path('images/images_menu'), $imageName);
+
+            $menus = [
+                'name'          => $request->name,
+                'image'         => $imageName,
+                'category_id'   => $request->category_id,
+                'stok'          => $request->stok,
+                'price'         => $request->price,
+                'status'        => $request->status,
+            ];
+            $menu->subcategory()->sync($request->subcategory);
+            $menu->update($menus);
+
+            return redirect()->route('menu.index')->with('success','You have successfully updated Menu.');
+    
+            
+        } else {
+            $request->validate([
+                'name' => 'required|min:5|max:100',
+                'category_id' => 'required',
+                'subcategory' => 'required',
+                'price' => 'required|integer',
+                'stok' => 'required|integer',
+                'status' => 'required',       
+            ]);
+            $menus = [
+                'name'          => $request->name,
+                'category_id'   => $request->category_id,
+                'stok'          => $request->stok,
+                'price'         => $request->price,
+                'status'        => $request->status,
+            ];
+            $menu->subcategory()->sync($request->subcategory);
+            $menu->update($menus);
+
+            return redirect()->route('menu.index')->with('success','You have successfully updated Menu.');
+        }
+        
+        
     }
 
     /**
@@ -86,6 +178,8 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $menu = Menu::findorFail($id);
+        $menu->delete();
+        return redirect()->route('menu.index')->with('success','Menu Was Deleted');
     }
 }

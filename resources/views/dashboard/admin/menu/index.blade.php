@@ -31,8 +31,13 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Image</th>
                                 <th>Name</th>
-                                <th>Slug</th>
+                                <th>Category</th>
+                                <th>Sub Category</th>
+                                <th>Stok</th>
+                                <th>Price</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -42,8 +47,31 @@
                                 
                             <tr>
                                 <td>{{$index+1}}</td>
+                                <td>
+                                    <img src="/images/images_menu/{{$menu->image}}"  class="img-fluid" height="100px" width="100px" alt="Preview image">
+                                </td>
                                 <td>{{$menu->name}}</td>
-                                <td>{{$menu->slug}}</td>
+                                <td>
+                                    @if ($menu->category)
+                                    {{$menu->category->name}}
+                                    @else
+                                    
+                                    @endif
+                                </td>
+                                <td>@if ($menu->subcategory)
+                                    @foreach ($menu->subcategory as $subcategory)
+                                    <ul>
+                                        <li>{{$subcategory->name}}</li>
+                                    </ul>
+                                    @endforeach
+                                @endif</td>
+                                <td>{{$menu->stok}}</td>
+                                <td>{{$menu->price}}</td>
+                                <td>@if ($menu->status == 1)
+                                   Active 
+                                @else
+                                    Non-Active
+                                @endif</td>
                                 <td>
                                     <form action="{{ route('menu.destroy',$menu->id) }}" method="POST">
                                     
