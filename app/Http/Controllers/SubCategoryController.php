@@ -5,20 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-use App\Models\Category;
+use App\Models\SubCategory;
 
-
-class CategoryController extends Controller
+class SubCategoryController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('dashboard.admin.category.index',compact('categories'));
+        $subcategories = SubCategory::all();
+        return view('dashboard.admin.subcategory.index',compact('subcategories'));
     }
 
     /**
@@ -28,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.admin.category.create');
+        return view('dashboard.admin.subcategory.create');
     }
 
     /**
@@ -46,11 +45,11 @@ class CategoryController extends Controller
         $slug = Str::slug($request->name);
 
 
-        Category::create([
+        SubCategory::create([
             'name'  => $request->name,
             'slug'  => $slug
         ]);
-        return redirect('/category')->with('success','Categroy Wa Added');
+        return redirect('/subcategory')->with('success','SubCategroy Wa Added');
     }
 
     /**
@@ -72,8 +71,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findorFail($id);
-        return view('dashboard.admin.category.edit',compact('category'));
+        $subcategory = SubCategory::findorFail($id);
+        return view('dashboard.admin.subcategory.edit',compact('subcategory'));
     }
 
     /**
@@ -92,11 +91,11 @@ class CategoryController extends Controller
         $slug = Str::slug($request->name);
 
 
-        Category::where('id',$id)->update([
+        SubCategory::where('id',$id)->update([
             'name'  => $request->name, 
             'slug'  => $slug
         ]);
-        return redirect('/category')->with('success','Categroy Was Updated');
+        return redirect('/subcategory')->with('success','SubCategroy Was Updated');
     }
     
 
@@ -108,8 +107,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findorFail($id);
-        $category->delete();
-        return redirect('/category')->with('success','Category Was Deleted');
+        $subcategory = SubCategory::findorFail($id);
+        $subcategory->delete();
+        return redirect('/subcategory')->with('success','SubCategory Was Deleted');
     }
 }

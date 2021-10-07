@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\Menu;
 
-
-class CategoryController extends Controller
+class MenuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('dashboard.admin.category.index',compact('categories'));
+        $menus = Menu::all();
+        return view('dashboard.admin.menu.index',compact('menus'));
+
     }
 
     /**
@@ -28,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.admin.category.create');
+        //
     }
 
     /**
@@ -39,18 +41,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'  => 'required|min:3|max:50'
-        ]);
-
-        $slug = Str::slug($request->name);
-
-
-        Category::create([
-            'name'  => $request->name,
-            'slug'  => $slug
-        ]);
-        return redirect('/category')->with('success','Categroy Wa Added');
+        //
     }
 
     /**
@@ -72,8 +63,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findorFail($id);
-        return view('dashboard.admin.category.edit',compact('category'));
+        //
     }
 
     /**
@@ -85,20 +75,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name'  => 'required|min:3|max:50'
-        ]);
-
-        $slug = Str::slug($request->name);
-
-
-        Category::where('id',$id)->update([
-            'name'  => $request->name, 
-            'slug'  => $slug
-        ]);
-        return redirect('/category')->with('success','Categroy Was Updated');
+        //
     }
-    
 
     /**
      * Remove the specified resource from storage.
@@ -108,8 +86,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findorFail($id);
-        $category->delete();
-        return redirect('/category')->with('success','Category Was Deleted');
+        //
     }
 }

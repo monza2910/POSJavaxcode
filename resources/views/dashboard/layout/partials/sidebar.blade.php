@@ -31,20 +31,19 @@
                 <li class="text-muted menu-title">Navigation</li>
 
                 <li>
-                    <a href="index.html" class="waves-effect"><i class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
+                    <a href="{{route('dashboard')}}" class="waves-effect"><i class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
                 </li>
 
                 <li>
-                    <a href="typography.html" class="waves-effect"><i class="zmdi zmdi-format-underlined"></i> <span> Typography </span> </a>
+                    <a href="{{route('category.index')}}" class="waves-effect"><i class="zmdi zmdi-format-underlined"></i> <span> Category </span> </a>
                 </li>
 
-                <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="zmdi zmdi-invert-colors"></i> <span> User Interface </span> <span class="menu-arrow"></span></a>
-                    <ul class="list-unstyled">
-                        <li><a href="">Category</a></li>
-                        <li><a href="">Sub Category</a></li>
-                        <li><a href="">Menu</a></li>
-                    </ul>
+                <li>
+                    <a href="{{route('subcategory.index')}}" class="waves-effect"><i class="zmdi zmdi-format-underlined"></i> <span> Sub Category </span> </a>
+                </li>
+                
+                <li>
+                    <a href="{{route('menu.index')}}" class="waves-effect"><i class="zmdi zmdi-format-underlined"></i> <span> Menu </span> </a>
                 </li>
 
 

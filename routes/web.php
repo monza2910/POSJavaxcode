@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,8 @@ Route::get('/', function () {
 
 Route::get('dashboard', function () {
     return view('dashboard.layout.template');
-});
+})->name('dashboard');
 
 Route::resource('category', CategoryController::class);
+Route::resource('subcategory', SubCategoryController::class);
+Route::resource('menu', MenuController::class);

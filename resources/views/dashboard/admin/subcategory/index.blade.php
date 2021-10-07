@@ -2,7 +2,7 @@
 @extends('dashboard.layout.template')
 
 @section('title')
-    Category
+    SubCategory
 @endsection
 
 
@@ -23,8 +23,8 @@
                 <div class="card-box table-responsive">
                     
 
-                    <h4 class="header-title m-t-0 m-b-30">Category</h4>
-                    <a href="{{route('category.create')}}" class="btn btn-icon icon-left btn-primary m-t-1 m-b-20 " ><i class="fa fa-plus"></i> Category</a>
+                    <h4 class="header-title m-t-0 m-b-30">SubCategory</h4>
+                    <a href="{{route('subcategory.create')}}" class="btn btn-icon icon-left btn-primary m-t-1 m-b-20 " ><i class="fa fa-plus"></i> SubCategory</a>
                        
 
                     <table id="datatable" class="table table-striped table-bordered">
@@ -38,19 +38,19 @@
                         </thead>
 
                         <tbody>
-                            @foreach ($categories as $index => $category)
+                            @foreach ($subcategories as $index => $subcategory)
                                 
                             <tr>
                                 <td>{{$index+1}}</td>
-                                <td>{{$category->name}}</td>
-                                <td>{{$category->slug}}</td>
+                                <td>{{$subcategory->name}}</td>
+                                <td>{{$subcategory->slug}}</td>
                                 <td>
-                                    <form action="{{ route('category.destroy',$category->id) }}" method="POST">
+                                    <form action="{{ route('subcategory.destroy',$subcategory->id) }}" method="POST">
                                     
                                         @csrf
                                         @method('DELETE')
                                         
-                                        <a href="{{route('category.edit',$category->id)}}" class="btn btn-icon icon-left btn-warning "><i class="fa fa-pencil"></i> Update</a>
+                                        <a href="{{route('subcategory.edit',$subcategory->id)}}" class="btn btn-icon icon-left btn-warning "><i class="fa fa-pencil"></i> Update</a>
                                         <button type="submit" class="btn btn-icon icon-left btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i> Delete</button>
                                     </form>                          
                                 </td>

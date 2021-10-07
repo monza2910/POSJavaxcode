@@ -13,13 +13,14 @@
             <div class="card-box">
     
     
-                <h4 class="header-title m-t-0 m-b-30">Create Category</h4>
+                <h4 class="header-title m-t-0 m-b-30">Update Category</h4>
     
-                <form class="form-horizontal" role="form" method="POST" action="{{route('category.store')}}">
+                <form class="form-horizontal" role="form" method="POST" action="{{route('category.update',$category->id)}}">
+                    @method('put')
                     @csrf
                     <div class="form-group ">
                         <label class="control-label">Name</label>
-                        <input type="text" name="name" class="form-control">
+                        <input type="text" name="name" value="{{$category->name}}" class="form-control">
                         @error('name')
                         <small class="text-danger">{{$message}}</small>
                         @enderror
@@ -28,6 +29,7 @@
                     <div class="form-group ">
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <a href="{{route('category.index')}}" class="btn btn-default">Back</a>
+
                     </div>
                 </form>
             </div>    
