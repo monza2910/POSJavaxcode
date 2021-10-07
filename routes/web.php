@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OutletController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,4 @@ Route::get('dashboard', function () {
 Route::resource('category', CategoryController::class);
 Route::resource('subcategory', SubCategoryController::class);
 Route::resource('menu', MenuController::class);
+Route::resource('outlet', OutletController::class);
