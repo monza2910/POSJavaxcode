@@ -43,7 +43,7 @@ class OutletMenuController extends Controller
         $request->validate([
             'menu_id' => 'required',
             'outlet_id' => 'required',
-            'stok' => 'nullable|min:5|max:20|integer',
+            'stok' => 'nullable|integer',
             'price' => 'required|integer',
             'status' => 'required',       
         ]);
