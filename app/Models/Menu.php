@@ -18,4 +18,8 @@ class Menu extends Model
     {
         return $this->belongsToMany(SubCategory::class);
     }
+
+    public function outletmenu(){
+        return $this->hasMany(OutletMenu::class);
+    }
 }

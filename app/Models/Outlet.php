@@ -9,4 +9,9 @@ class Outlet extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    
+    public function outletmenu(){
+        return $this->hasMany(OutletMenu::class);
+    }
 }
+

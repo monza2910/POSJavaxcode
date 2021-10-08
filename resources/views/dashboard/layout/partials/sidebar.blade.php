@@ -45,6 +45,14 @@
                 <li>
                     <a href="{{route('menu.index')}}" class="waves-effect"><i class="zmdi zmdi-format-underlined"></i> <span> Menu </span> </a>
                 </li>
+               
+                <li>
+                    <a href="{{route('outlet.index')}}" class="waves-effect"><i class="zmdi zmdi-format-underlined"></i> <span> Outlet </span> </a>
+                </li>
+               
+                <li>
+                    <a href="{{route('outletmenu.index')}}" class="waves-effect"><i class="zmdi zmdi-format-underlined"></i> <span> Menu in Outlet </span> </a>
+                </li>
 
 
             </ul>
